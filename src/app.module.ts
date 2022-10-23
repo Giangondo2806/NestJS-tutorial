@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { PostModule } from './posts/post.module';
+import { StoreModule } from './store/store.module';
 
 @Module({
-  imports: [UsersModule, PostModule],
+  imports: [UsersModule, PostModule, StoreModule.forRoot()],
   controllers: [],
   providers: [],
 })
