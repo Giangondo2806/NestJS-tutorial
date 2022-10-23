@@ -33,12 +33,12 @@ export class StoreModule {
   }
 
   static forFeature(storeConfig?: StoreFeatureConfig): DynamicModule {
+    const token = 'STORE_SERVICE' + storeConfig.filename;
     return {
       module: StoreModule,
-      imports: [RootStoreModule],
       providers: [
         {
-          provide: 'STORE_SERVICE',
+          provide: token,
           useFactory: () => {
             const storeOption = StoreModule.buildStoreOptions({
               ...rootStoreOption,
@@ -48,7 +48,7 @@ export class StoreModule {
           },
         },
       ],
-      exports: ['STORE_SERVICE'],
+      exports: [token],
     };
   }
 
@@ -56,7 +56,7 @@ export class StoreModule {
     return Object.assign(
       {
         dirname: DEFAULT_STORE_DIR,
-        fileName: DEFAULT_FILE_NAME,
+        filename: DEFAULT_FILE_NAME,
       },
       storeOptions,
     );

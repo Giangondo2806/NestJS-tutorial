@@ -4,13 +4,7 @@ import { PostModule } from './posts/post.module';
 import { StoreModule } from './store/store.module';
 
 @Module({
-  imports: [
-    UsersModule,
-    PostModule,
-    StoreModule.forRoot({
-      dirname: 'ABCD',
-    }),
-  ],
+  imports: [UsersModule, PostModule, StoreModule.forRoot()],
   controllers: [],
   providers: [],
 })
