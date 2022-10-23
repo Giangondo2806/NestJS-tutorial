@@ -1,10 +1,12 @@
-import { Inject } from '@nestjs/common';
-import { StoreConfig } from './store.config';
+import { Inject, Optional } from '@nestjs/common';
+import { STORE_CONFIG_TOKEN, StoreConfig } from './store.config';
 import * as fs from 'fs';
 
 export class StoreService {
-  constructor(@Inject('STORE_CONFIG') private storeConfig: StoreConfig) {
-    if (!fs.existsSync(storeConfig.dirname)) {
+  constructor(
+    @Optional() @Inject(STORE_CONFIG_TOKEN) private storeConfig: StoreConfig,
+  ) {
+    if (storeConfig && !fs.existsSync(storeConfig.dirname)) {
       fs.mkdirSync(storeConfig.dirname);
     }
   }

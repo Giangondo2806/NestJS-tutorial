@@ -4,7 +4,7 @@ import { StoreService } from '../store/store.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private storeService: StoreService) {}
+  constructor(@Inject('STORE_SERVICE') private storeService: StoreService) {}
   create(user: UsersDto): UsersDto {
     this.storeService.save(user);
     return user;
