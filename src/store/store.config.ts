@@ -1,4 +1,4 @@
 export interface StoreConfig {
-  dir: string;
-  path: string;
+  dirname: string;
+  filename: string;
 }

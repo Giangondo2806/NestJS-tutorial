@@ -1,18 +1,20 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
+import { StoreService } from './store.service';
 import { StoreConfig } from './store.config';
-import { StoreService } from '../users/store.service';
 
-@Module({
-  providers: [
-    {
-      provide: 'STORE_CONFIG',
-      useValue: {
-        dir: 'store',
-        path: 'data.json',
-      } as StoreConfig,
-    },
-    StoreService,
-  ],
-  exports: [StoreService],
-})
-export class StoreModule {}
+@Module({})
+export class StoreModule {
+  static register(storeConfig: StoreConfig): DynamicModule {
+    return {
+      module: StoreModule,
+      providers: [
+        {
+          provide: 'STORE_CONFIG',
+          useValue: storeConfig,
+        },
+        StoreService,
+      ],
+      exports: [StoreService],
+    };
+  }
+}
